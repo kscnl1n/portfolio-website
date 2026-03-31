@@ -40,6 +40,7 @@ a:hover{ opacity: .85; }
 .t-lead{ font-size: 1.15rem; margin: 0 0 1rem; }
 .t-body{ font-size: 1.02rem; margin: 0 0 1rem; }
 .t-small{ font-size: .95rem; margin: 0; opacity: .9; }
+.t-bold{font-size: 1.15rem; margin: 0 0 1rem; }
 
 /* Header / Nav */
 .site-header{

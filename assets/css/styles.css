@@ -13,7 +13,7 @@ body{
   margin:0;
   background: var(--bg);
   color: var(--text);
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Google Sans", sans-serif;
   line-height: 1.6;
 }
 
@@ -101,7 +101,7 @@ a:hover{ opacity: .85; }
 .panel{
   grid-column: span 4;
   border: 1px solid var(--border);
-  padding: 1rem;
+  padding: 2rem;
 }
 
 /* Pages */

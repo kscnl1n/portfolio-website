@@ -1,7 +1,7 @@
 :root{
-  --bg: #1F1F1F;
-  --text: #F5F5F5;
-  --border: rgba(245,245,245,.18);
+  --bg: #ff00dd;
+  --text: #15ff00;
+  --border: rgba(132, 0, 255, 0.18);
   --border-strong: rgba(245,245,245,.35);
   --max: 980px;
 }

@@ -9,8 +9,8 @@ binding = "ASSETS"
 
 [[routes]]
 pattern = "kayleescanlin.dev/*"
-custom_domain = true
+zone_name = "kayleescanlin.dev"
 
 [[routes]]
 pattern = "www.kayleescanlin.dev/*"
-custom_domain = true
+zone_name = "kayleescanlin.dev"

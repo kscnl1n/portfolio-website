@@ -193,6 +193,79 @@
       padding-left: 1.1rem;
     }
 
+    .search-section {
+      margin-top: 2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(26, 27, 45, 0.32), rgba(17, 17, 24, 0.95));
+      padding: 1.2rem 1.1rem;
+    }
+
+    .search-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--accent-2);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .search-help {
+      margin: 0 0 0.8rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .search-input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.75rem 0.85rem;
+      background: #0f1020;
+      color: var(--text);
+      font: inherit;
+    }
+
+    .search-results {
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .result-card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.85rem;
+      background: rgba(10, 10, 13, 0.7);
+    }
+
+    .result-title {
+      margin: 0;
+      font-weight: 700;
+      color: var(--text);
+      font-size: 0.98rem;
+    }
+
+    .result-meta {
+      margin: 0.2rem 0 0.35rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    .result-summary {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .search-empty {
+      margin-top: 0.75rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
     .site-footer {
       border-top: 1px solid var(--line);
       padding: 1.2rem 0 2rem;
@@ -268,6 +341,20 @@ $ echo $STATUS
       </div>
     </section>
 
+    <section class="search-section" aria-labelledby="search-title">
+      <label id="search-title" class="search-label" for="siteSearch">Search Bar</label>
+      <p class="search-help">Search posts by title, type, or tags (example: AI, HPC, data engineering).</p>
+      <input
+        id="siteSearch"
+        class="search-input"
+        type="search"
+        placeholder="Search posts by keyword..."
+        autocomplete="off"
+      />
+      <div id="searchResults" class="search-results"></div>
+      <p id="searchEmpty" class="search-empty" hidden>No matching posts found.</p>
+    </section>
+
     <section class="columns">
       <article class="panel">
         <h2 class="t-h2">Focus</h2>
@@ -309,6 +396,103 @@ $ echo $STATUS
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const fallbackPosts = [
+      {
+        title: "Texas State Projects - Founder",
+        type: "Project",
+        summary: "Founded and led Texas State Projects.",
+        tags: ["project", "founder", "leadership"]
+      },
+      {
+        title: "LEAP2 Cluster Portal - Lead Engineer",
+        type: "Project",
+        summary: "Led engineering for the LEAP2 cluster portal.",
+        tags: ["hpc", "engineering", "slurm", "portal"]
+      },
+      {
+        title: "Pacific Northwest National Labs - Data Engineering Intern",
+        type: "Work Experience",
+        summary: "Worked on data engineering and analytics initiatives.",
+        tags: ["data engineering", "analytics", "ai", "ml"]
+      },
+      {
+        title: "Texas Advanced Computing Center - Machine Learning Engineering Intern",
+        type: "Work Experience",
+        summary: "Contributed to machine learning engineering projects.",
+        tags: ["ai", "machine learning", "hpc", "research"]
+      },
+      {
+        title: "Software Developer and Junior Project Manager - High-Performance Computing Engineering Lab at Texas State",
+        type: "Work Experience",
+        summary: "Current role focused on software and project delivery in HPC.",
+        tags: ["hpc", "software development", "project management"]
+      }
+    ];
+    let searchablePosts = [];
+
+    const searchInput = document.getElementById("siteSearch");
+    const resultsRoot = document.getElementById("searchResults");
+    const emptyState = document.getElementById("searchEmpty");
+
+    function matchesQuery(post, query) {
+      const haystack = [
+        post.title,
+        post.type,
+        post.summary,
+        post.tags.join(" ")
+      ].join(" ").toLowerCase();
+      return haystack.includes(query.toLowerCase());
+    }
+
+    function renderResults(posts) {
+      resultsRoot.innerHTML = "";
+      emptyState.hidden = posts.length !== 0;
+
+      posts.forEach((post) => {
+        const card = document.createElement("article");
+        card.className = "result-card";
+        card.innerHTML = `
+          <h3 class="result-title">${post.title}</h3>
+          <p class="result-meta">${post.type} · Tags: ${post.tags.join(", ")}</p>
+          <p class="result-summary">${post.summary}</p>
+        `;
+        resultsRoot.appendChild(card);
+      });
+    }
+
+    function runSearch() {
+      const query = searchInput.value.trim();
+      if (!query) {
+        renderResults(searchablePosts);
+        return;
+      }
+
+      const filteredPosts = searchablePosts.filter((post) => matchesQuery(post, query));
+      renderResults(filteredPosts);
+    }
+
+    async function loadSearchablePosts() {
+      try {
+        const response = await fetch("/assets/data/posts.json");
+        if (!response.ok) {
+          throw new Error("Failed to load posts data.");
+        }
+        const data = await response.json();
+        if (!Array.isArray(data)) {
+          throw new Error("Posts data must be an array.");
+        }
+        searchablePosts = data;
+      } catch (error) {
+        searchablePosts = fallbackPosts;
+        console.warn("Using fallback search posts data:", error);
+      } finally {
+        runSearch();
+      }
+    }
+
+    searchInput.addEventListener("input", runSearch);
+    loadSearchablePosts();
   </script>
 </body>
 </html>

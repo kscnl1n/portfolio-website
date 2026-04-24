@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Texas State Projects - Founder",
+    "type": "Project",
+    "summary": "Founded and led Texas State Projects.",
+    "tags": ["project", "founder", "leadership"]
+  },
+  {
+    "title": "LEAP2 Cluster Portal - Lead Engineer",
+    "type": "Project",
+    "summary": "Led engineering for the LEAP2 cluster portal.",
+    "tags": ["hpc", "engineering", "slurm", "portal"]
+  },
+  {
+    "title": "Pacific Northwest National Labs - Data Engineering Intern",
+    "type": "Work Experience",
+    "summary": "Worked on data engineering and analytics initiatives.",
+    "tags": ["data engineering", "analytics", "ai", "ml"]
+  },
+  {
+    "title": "Texas Advanced Computing Center - Machine Learning Engineering Intern",
+    "type": "Work Experience",
+    "summary": "Contributed to machine learning engineering projects.",
+    "tags": ["ai", "machine learning", "hpc", "research"]
+  },
+  {
+    "title": "Software Developer and Junior Project Manager - High-Performance Computing Engineering Lab at Texas State",
+    "type": "Work Experience",
+    "summary": "Current role focused on software and project delivery in HPC.",
+    "tags": ["hpc", "software development", "project management"]
+  }
+]

@@ -3,30 +3,35 @@
     "title": "Texas State Projects - Founder",
     "type": "Project",
     "summary": "Founded and led Texas State Projects.",
-    "tags": ["project", "founder", "leadership"]
+    "tags": ["project", "founder", "leadership", "catforge", "texas state"],
+    "href": "pages/resume.html#resume-lead-catforge"
   },
   {
     "title": "LEAP2 Cluster Portal - Lead Engineer",
     "type": "Project",
     "summary": "Led engineering for the LEAP2 cluster portal.",
-    "tags": ["hpc", "engineering", "slurm", "portal"]
+    "tags": ["hpc", "engineering", "slurm", "portal", "open ondemand", "react", "fastapi"],
+    "href": "pages/resume.html#resume-exp-cads-leap2"
   },
   {
     "title": "Pacific Northwest National Labs - Data Engineering Intern",
     "type": "Work Experience",
     "summary": "Worked on data engineering and analytics initiatives.",
-    "tags": ["data engineering", "analytics", "ai", "ml"]
+    "tags": ["data engineering", "analytics", "ai", "ml", "codebert", "chromadb", "pnnl"],
+    "href": "pages/resume.html#resume-exp-pnnl"
   },
   {
     "title": "Texas Advanced Computing Center - Machine Learning Engineering Intern",
     "type": "Work Experience",
     "summary": "Contributed to machine learning engineering projects.",
-    "tags": ["ai", "machine learning", "hpc", "research"]
+    "tags": ["ai", "machine learning", "hpc", "research", "tacc", "docker", "iot"],
+    "href": "pages/resume.html#resume-exp-tacc"
   },
   {
     "title": "Software Developer and Junior Project Manager - High-Performance Computing Engineering Lab at Texas State",
     "type": "Work Experience",
     "summary": "Current role focused on software and project delivery in HPC.",
-    "tags": ["hpc", "software development", "project management"]
+    "tags": ["hpc", "software development", "project management", "grafana", "prometheus", "leap2"],
+    "href": "pages/resume.html#resume-exp-cads-leap2"
   }
 ]

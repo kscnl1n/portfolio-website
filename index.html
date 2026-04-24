@@ -240,6 +240,32 @@
       background: rgba(10, 10, 13, 0.7);
     }
 
+    a.result-card {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    a.result-card:hover {
+      border-color: rgba(134, 255, 209, 0.45);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    a.result-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    a.result-card .result-title {
+      color: var(--text);
+    }
+
+    a.result-card:hover .result-title {
+      color: var(--accent);
+    }
+
     .result-title {
       margin: 0;
       font-weight: 700;
@@ -296,6 +322,15 @@
         padding: 0.7rem 0;
       }
     }
+
+    [id]:target {
+      scroll-margin-top: 5.5rem;
+    }
+
+    section#about-hero:target,
+    article.panel:target {
+      box-shadow: 0 0 0 2px rgba(134, 255, 209, 0.35);
+    }
   </style>
 </head>
 <body>
@@ -314,7 +349,7 @@
   </header>
 
   <main id="main" class="container">
-    <section class="hero">
+    <section id="about-hero" class="hero">
       <p class="eyebrow">// about</p>
       <h1>Hi, I’m Kaylee.</h1>
 
@@ -343,12 +378,12 @@ $ echo $STATUS
 
     <section class="search-section" aria-labelledby="search-title">
       <label id="search-title" class="search-label" for="siteSearch">Search Bar</label>
-      <p class="search-help">Search posts by title, type, or tags (example: AI, HPC, data engineering).</p>
+      <p class="search-help">Search across this site: About highlights, projects, resume sections, and highlights (try <b>kubernetes</b>, <b>YOLO</b>, <b>Slurm</b>, or <b>resume</b>). Click a result to jump to that spot.</p>
       <input
         id="siteSearch"
         class="search-input"
         type="search"
-        placeholder="Search posts by keyword..."
+        placeholder="Search the whole site…"
         autocomplete="off"
       />
       <div id="searchResults" class="search-results"></div>
@@ -356,7 +391,7 @@ $ echo $STATUS
     </section>
 
     <section class="columns">
-      <article class="panel">
+      <article id="about-panel-focus" class="panel">
         <h2 class="t-h2">Focus</h2>
         <p class="t-body">Currently, I work as a software developer and junior project manager for the High-Performance
           Computing Engineering lab at Texas State.</p>
@@ -365,17 +400,17 @@ $ echo $STATUS
         </p>
       </article>
 
-      <article class="panel">
+      <article id="about-panel-recent" class="panel">
         <h2 class="t-h2">Recent</h2>
         <ul class="t-body">
-          <li>Texas State Projects - Founder</li>
-          <li>LEAP2 Cluster Portal - Lead Engineer</li>
-          <li>Pacific Northwest National Labs</li>
-          <li>Texas Advanced Computing Center</li>
+          <li><b>CatForge- Founder</b></li>
+          <li><b>LEAP2 Cluster Portal - Lead Engineer</b></li>
+          <li><b>Pacific Northwest National Labs</b></li>
+          <li><b>Texas Advanced Computing Center</b></li>
         </ul>
       </article>
 
-      <article class="panel">
+      <article id="about-panel-links" class="panel">
         <h2 class="t-h2">Links</h2>
         <p class="t-body">
           <a href="/index.html">About</a> ·
@@ -403,98 +438,362 @@ $ echo $STATUS
         title: "Texas State Projects - Founder",
         type: "Project",
         summary: "Founded and led Texas State Projects.",
-        tags: ["project", "founder", "leadership"]
+        tags: ["project", "founder", "leadership"],
+        href: "pages/resume.html#resume-lead-catforge"
       },
       {
         title: "LEAP2 Cluster Portal - Lead Engineer",
         type: "Project",
         summary: "Led engineering for the LEAP2 cluster portal.",
-        tags: ["hpc", "engineering", "slurm", "portal"]
+        tags: ["hpc", "engineering", "slurm", "portal"],
+        href: "pages/resume.html#resume-exp-cads-leap2"
       },
       {
         title: "Pacific Northwest National Labs - Data Engineering Intern",
         type: "Work Experience",
         summary: "Worked on data engineering and analytics initiatives.",
-        tags: ["data engineering", "analytics", "ai", "ml"]
+        tags: ["data engineering", "analytics", "ai", "ml"],
+        href: "pages/resume.html#resume-exp-pnnl"
       },
       {
         title: "Texas Advanced Computing Center - Machine Learning Engineering Intern",
         type: "Work Experience",
         summary: "Contributed to machine learning engineering projects.",
-        tags: ["ai", "machine learning", "hpc", "research"]
+        tags: ["ai", "machine learning", "hpc", "research"],
+        href: "pages/resume.html#resume-exp-tacc"
       },
       {
         title: "Software Developer and Junior Project Manager - High-Performance Computing Engineering Lab at Texas State",
         type: "Work Experience",
         summary: "Current role focused on software and project delivery in HPC.",
-        tags: ["hpc", "software development", "project management"]
+        tags: ["hpc", "software development", "project management"],
+        href: "pages/resume.html#resume-exp-cads-leap2"
       }
     ];
-    let searchablePosts = [];
+
+    /** Directory URL for the current page (trailing slash), works in subfolders. */
+    function siteBaseUrl() {
+      const path = window.location.pathname || "/";
+      if (path.endsWith("/")) {
+        return path;
+      }
+      const trimmed = path.replace(/[^/]+$/, "");
+      return trimmed || "/";
+    }
+
+    function resolveSiteUrl(relativeHref) {
+      if (!relativeHref) {
+        return window.location.pathname + window.location.search + window.location.hash;
+      }
+      const u = new URL(relativeHref, window.location.origin + siteBaseUrl());
+      return u.pathname + u.search + u.hash;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function truncate(text, maxLen) {
+      const t = String(text || "").replace(/\s+/g, " ").trim();
+      if (t.length <= maxLen) {
+        return t;
+      }
+      return t.slice(0, maxLen - 1).trimEnd() + "…";
+    }
+
+    function tokenizeQuery(query) {
+      return String(query || "")
+        .toLowerCase()
+        .split(/\s+/)
+        .map((t) => t.trim())
+        .filter(Boolean);
+    }
+
+    function haystackForHit(hit) {
+      return [hit.title, hit.type, hit.summary, (hit.tags || []).join(" "), hit.keywords || ""].join(" ").toLowerCase();
+    }
+
+    function matchesTokens(haystack, tokens) {
+      if (!tokens.length) {
+        return true;
+      }
+      return tokens.every((t) => haystack.includes(t));
+    }
+
+    function parseProjectsHtml(html) {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const hits = [];
+      doc.querySelectorAll(".project-card[data-keywords][id]").forEach((card) => {
+        const titleEl = card.querySelector(".project-card__title");
+        const bodyEl = card.querySelector(".project-card__body");
+        const title = titleEl ? titleEl.textContent.trim() : card.id;
+        const summary = bodyEl ? bodyEl.textContent.trim() : "";
+        const tags = Array.from(card.querySelectorAll(".project-tags li")).map((li) => li.textContent.trim());
+        const keywords = (card.getAttribute("data-keywords") || "").replace(/\s+/g, " ").trim();
+        const section = card.closest("[data-section]");
+        const sectionLabel = section && section.getAttribute("data-section") === "professional" ? "Professional project" : "Personal project";
+        hits.push({
+          title,
+          type: sectionLabel,
+          summary: truncate(summary, 220),
+          tags,
+          keywords,
+          href: "pages/projects.html#" + card.id
+        });
+      });
+      return hits;
+    }
+
+    function parseResumeHtml(html) {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const hits = [];
+      const main = doc.querySelector("main.container");
+      if (!main) {
+        return hits;
+      }
+
+      main.querySelectorAll("section[id] > h2").forEach((h2) => {
+        const section = h2.closest("section[id]");
+        if (!section) {
+          return;
+        }
+        const title = h2.textContent.trim();
+        const summary = truncate(section.textContent.replace(/\s+/g, " ").trim(), 200);
+        hits.push({
+          title: "Resume — " + title,
+          type: "Resume section",
+          summary,
+          tags: ["resume", title.toLowerCase()],
+          keywords: "resume " + title.toLowerCase(),
+          href: "pages/resume.html#" + section.id
+        });
+      });
+
+      main.querySelectorAll("article[id] > h3:first-of-type").forEach((h3) => {
+        const article = h3.closest("article[id]");
+        if (!article) {
+          return;
+        }
+        const title = h3.textContent.trim();
+        const summary = truncate(article.textContent.replace(/\s+/g, " ").trim(), 220);
+        const tags = ["resume"];
+        hits.push({
+          title: "Resume — " + title,
+          type: "Resume",
+          summary,
+          tags,
+          keywords: ("resume " + title + " " + summary).toLowerCase(),
+          href: "pages/resume.html#" + article.id
+        });
+      });
+
+      const dl = doc.querySelector("#resume-pdf-download");
+      if (dl) {
+        hits.push({
+          title: "Resume — Download PDF",
+          type: "Resume",
+          summary: "Download the latest PDF resume.",
+          tags: ["resume", "pdf", "download"],
+          keywords: "resume pdf download scanlin",
+          href: "pages/resume.html#resume-pdf-download"
+        });
+      }
+
+      return hits;
+    }
+
+    function parseCatPicturesHtml(html) {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const hero = doc.querySelector("#page-fungus");
+      if (!hero) {
+        return [];
+      }
+      const title = hero.querySelector("h1");
+      const body = hero.querySelector("p");
+      return [
+        {
+          title: title ? title.textContent.trim() : "Fungus",
+          type: "Cat pictures",
+          summary: body ? body.textContent.trim() : "Photo gallery.",
+          tags: ["cat", "fungus", "photos", "gallery"],
+          keywords: "fungus cat pictures photos gallery pet",
+          href: "pages/cat-pictures.html#page-fungus"
+        }
+      ];
+    }
+
+    function parseAboutPageHits() {
+      const hits = [];
+      const hero = document.querySelector("#about-hero");
+      if (hero) {
+        const summary = truncate(hero.textContent.replace(/\s+/g, " ").trim(), 260);
+        hits.push({
+          title: "About — Kaylee Scanlin",
+          type: "Home",
+          summary,
+          tags: ["about", "portfolio", "texas state", "hpc", "contact"],
+          keywords: summary.toLowerCase() + " undergrad computer science portfolio email",
+          href: "index.html#about-hero"
+        });
+      }
+
+      document.querySelectorAll(".columns .panel[id]").forEach((panel) => {
+        const h2 = panel.querySelector(".t-h2");
+        const label = h2 ? h2.textContent.trim() : "Highlight";
+        hits.push({
+          title: "About — " + label,
+          type: "Home",
+          summary: truncate(panel.textContent.replace(/\s+/g, " ").trim(), 220),
+          tags: ["about", label.toLowerCase()],
+          keywords: (label + " " + panel.textContent).toLowerCase(),
+          href: "index.html#" + panel.id
+        });
+      });
+
+      return hits;
+    }
+
+    function normalizeJsonPosts(rows) {
+      if (!Array.isArray(rows)) {
+        return [];
+      }
+      return rows.map((row) => ({
+        title: row.title,
+        type: row.type || "Post",
+        summary: row.summary || "",
+        tags: Array.isArray(row.tags) ? row.tags : [],
+        keywords: (Array.isArray(row.tags) ? row.tags.join(" ") : "") + " " + (row.title || "") + " " + (row.summary || ""),
+        href: row.href || ""
+      }));
+    }
+
+    let searchableHits = [];
+    let indexReady = false;
 
     const searchInput = document.getElementById("siteSearch");
     const resultsRoot = document.getElementById("searchResults");
     const emptyState = document.getElementById("searchEmpty");
 
-    function matchesQuery(post, query) {
-      const haystack = [
-        post.title,
-        post.type,
-        post.summary,
-        post.tags.join(" ")
-      ].join(" ").toLowerCase();
-      return haystack.includes(query.toLowerCase());
-    }
-
-    function renderResults(posts) {
+    function renderResults(hits) {
       resultsRoot.innerHTML = "";
-      emptyState.hidden = posts.length !== 0;
+      emptyState.hidden = hits.length !== 0;
 
-      posts.forEach((post) => {
-        const card = document.createElement("article");
-        card.className = "result-card";
-        card.innerHTML = `
-          <h3 class="result-title">${post.title}</h3>
-          <p class="result-meta">${post.type} · Tags: ${post.tags.join(", ")}</p>
-          <p class="result-summary">${post.summary}</p>
-        `;
-        resultsRoot.appendChild(card);
+      hits.forEach((hit) => {
+        const href = resolveSiteUrl(hit.href);
+        const tags = (hit.tags || []).join(", ");
+        const link = document.createElement("a");
+        link.className = "result-card";
+        link.href = href;
+        link.innerHTML =
+          "<h3 class=\"result-title\">" +
+          escapeHtml(hit.title) +
+          "</h3>" +
+          "<p class=\"result-meta\">" +
+          escapeHtml(hit.type) +
+          " · Tags: " +
+          escapeHtml(tags) +
+          "</p>" +
+          "<p class=\"result-summary\">" +
+          escapeHtml(hit.summary) +
+          "</p>";
+        resultsRoot.appendChild(link);
       });
     }
 
     function runSearch() {
-      const query = searchInput.value.trim();
-      if (!query) {
+      const raw = searchInput.value.trim();
+      const tokens = tokenizeQuery(raw);
+      if (!tokens.length) {
         resultsRoot.innerHTML = "";
         emptyState.hidden = true;
         return;
       }
 
-      const filteredPosts = searchablePosts.filter((post) => matchesQuery(post, query));
-      renderResults(filteredPosts);
+      if (!indexReady) {
+        resultsRoot.innerHTML = "";
+        emptyState.hidden = false;
+        emptyState.textContent = "Loading search index…";
+        return;
+      }
+
+      emptyState.textContent = "No matching results.";
+      const filtered = searchableHits.filter((hit) => matchesTokens(haystackForHit(hit), tokens));
+      renderResults(filtered);
     }
 
-    async function loadSearchablePosts() {
-      try {
-        const response = await fetch("/assets/data/posts.json");
-        if (!response.ok) {
-          throw new Error("Failed to load posts data.");
-        }
-        const data = await response.json();
-        if (!Array.isArray(data)) {
-          throw new Error("Posts data must be an array.");
-        }
-        searchablePosts = data;
-      } catch (error) {
-        searchablePosts = fallbackPosts;
-        console.warn("Using fallback search posts data:", error);
-      } finally {
-        runSearch();
+    async function fetchText(url) {
+      const res = await fetch(url, { credentials: "same-origin" });
+      if (!res.ok) {
+        throw new Error("Failed to fetch: " + url);
       }
+      return res.text();
+    }
+
+    async function buildSearchIndex() {
+      const base = siteBaseUrl();
+      const aboutHits = parseAboutPageHits();
+
+      let posts = [];
+      try {
+        const res = await fetch(new URL("assets/data/posts.json", window.location.origin + base).pathname, {
+          credentials: "same-origin"
+        });
+        if (res.ok) {
+          posts = normalizeJsonPosts(await res.json());
+        }
+      } catch (e) {
+        posts = normalizeJsonPosts(fallbackPosts);
+      }
+      if (!posts.length) {
+        posts = normalizeJsonPosts(fallbackPosts);
+      }
+
+      const hits = aboutHits.concat(posts);
+
+      const remoteSpecs = [
+        { key: "projects", path: "pages/projects.html" },
+        { key: "resume", path: "pages/resume.html" },
+        { key: "cats", path: "pages/cat-pictures.html" }
+      ];
+
+      await Promise.all(
+        remoteSpecs.map(async (spec) => {
+          try {
+            const url = new URL(spec.path, window.location.origin + base).pathname;
+            const html = await fetchText(url);
+            if (spec.key === "projects") {
+              hits.push.apply(hits, parseProjectsHtml(html));
+            } else if (spec.key === "resume") {
+              hits.push.apply(hits, parseResumeHtml(html));
+            } else if (spec.key === "cats") {
+              hits.push.apply(hits, parseCatPicturesHtml(html));
+            }
+          } catch (err) {
+            console.warn("Site search could not index " + spec.path + ":", err);
+          }
+        })
+      );
+
+      const dedup = new Map();
+      hits.forEach((hit) => {
+        const key = (hit.href || "") + "|" + (hit.title || "");
+        if (!dedup.has(key)) {
+          dedup.set(key, hit);
+        }
+      });
+      searchableHits = Array.from(dedup.values());
+      indexReady = true;
+      emptyState.textContent = "No matching results.";
+      runSearch();
     }
 
     searchInput.addEventListener("input", runSearch);
-    loadSearchablePosts();
+    buildSearchIndex();
   </script>
 </body>
 </html>

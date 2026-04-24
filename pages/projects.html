@@ -158,6 +158,10 @@
     @media (max-width: 720px) {
       .nav { flex-direction: column; align-items: flex-start; justify-content: center; padding: 0.7rem 0; }
     }
+    .project-card[id]:target {
+      scroll-margin-top: 5.5rem;
+      box-shadow: 0 0 0 2px rgba(134, 255, 209, 0.45);
+    }
   </style>
 </head>
 <body>
@@ -188,6 +192,22 @@
       use this search bar.
     </p>
 
+    <article
+    id="leap2-gui"
+    class="project-card"
+    data-keywords="txst hpc portal apache leap2 IT devops flask web sensor react fastapi plotly sysadmin cluster portal"
+  >
+    <h2 class="project-card__title">TXST IT Dept. — LEAP2 Portal </h2>
+    <p class="project-card__body">Proposed and directed <a href="https://docs.google.com/document/d/1TGwgyQ1QHgkVgm085Q8YvYXA1LYmuDsj04Xi8KQkG3o/edit?usp=sharing" target="_blank">GUI project</a> for the Texas State HPC Cluster LEAP2. Managing team of 4 and serving as lead engineer.</p>
+    <ul class="project-tags" aria-label="Skills">
+      <li>HPC</li>
+      <li>OOD</li>
+      <li>React</li>
+      <li>Linux</li>
+      <li>Slurm</li>
+    </ul>
+  </article>
+
     <div class="search-wrap">
       <label for="projectSearch">Filter by keyword</label>
       <input id="projectSearch" type="search" placeholder="e.g. Python, Kubernetes, YOLO…" autocomplete="off" />
@@ -200,6 +220,7 @@
 
         <div class="project-list">
           <a
+            id="project-tacc-ui-agent"
             class="project-card"
             href="https://github.com/kscnl1n/TACC-UI-Agent"
             rel="noopener noreferrer"
@@ -219,6 +240,7 @@
           </a>
 
           <article
+            id="project-pnnl-regression"
             class="project-card"
             data-keywords="pnnl pacific northwest national lab regression codebert chromadb numpy machine learning embeddings hpc benchmark lamellar performance"
           >
@@ -234,6 +256,7 @@
           </article>
 
           <article
+            id="project-tacc-ai-spy"
             class="project-card"
             data-keywords="tacc ai spy stable diffusion lora docker generative ai research visualization python abstract"
           >
@@ -249,6 +272,7 @@
           </article>
 
           <article
+            id="project-tacc-astra"
             class="project-card"
             data-keywords="tacc project astra astra methane iot sql etl pipeline sensor emissions environmental plotly dash flask tableau"
           >
@@ -264,6 +288,7 @@
           </article>
 
           <article
+            id="project-ut-yolo-caution"
             class="project-card"
             data-keywords="ut austin yolo yolov8 caution multispectral computer vision pytorch gpu bias detection cir4sc poster paper"
           >
@@ -286,6 +311,7 @@
 
         <div class="project-list">
           <a
+            id="project-paperleaf"
             class="project-card"
             href="https://github.com/kscnl1n/paperleaf"
             rel="noopener noreferrer"
@@ -305,6 +331,7 @@
           </a>
 
           <a
+            id="project-kube-graph"
             class="project-card"
             href="https://github.com/kscnl1n/kube-graph"
             rel="noopener noreferrer"
@@ -324,6 +351,7 @@
           </a>
 
           <a
+            id="project-catforge-space"
             class="project-card"
             href="https://github.com/kscnl1n/catforge-space/tree/master"
             rel="noopener noreferrer"

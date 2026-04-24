@@ -464,7 +464,8 @@ $ echo $STATUS
     function runSearch() {
       const query = searchInput.value.trim();
       if (!query) {
-        renderResults(searchablePosts);
+        resultsRoot.innerHTML = "";
+        emptyState.hidden = true;
         return;
       }
 

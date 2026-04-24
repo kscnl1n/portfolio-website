@@ -45,6 +45,14 @@
       letter-spacing: .1em; font-weight: 600;
     }
     h2 + h3.resume-section-label { margin-top: .5rem; }
+    .resume-download-wrap { margin-bottom: 1rem; }
+    .resume-download {
+      display: inline-flex; align-items: center; gap: .5rem; padding: .65rem 1.1rem;
+      font-size: .92rem; font-weight: 600; font-family: inherit;
+      color: var(--bg); background: var(--accent); border: none; border-radius: 10px;
+      text-decoration: none; cursor: pointer; transition: filter .15s ease, transform .15s ease;
+    }
+    .resume-download:hover { color: var(--bg); filter: brightness(1.08); transform: translateY(-1px); }
     @media (max-width: 720px) {
       .nav { flex-direction: column; align-items: flex-start; justify-content: center; padding: .7rem 0; }
     }
@@ -55,15 +63,23 @@
     <nav class="nav container">
       <a class="brand" href="/"></a>
       <div class="nav-links">
-        <a href="/index.html">About</a>
-        <a class="active" href="/pages/projects.html" aria-current="page">Projects</a>
-        <a href="mailto:scanlinsystems@gmail.com">Contact</a>
-        <a href="/pages/cat-pictures.html">Cat</a>
+        <a href="/index.html">About</a> ·
+        <a href="/pages/projects.html">Projects</a> ·
+        <a href="/pages/resume.html">Resume</a> ·
+        <a href="https://www.linkedin.com/in/k-scanlin-6815b8284/">LinkedIn</a> ·
+        <a href="https://github.com/kscnl1n">GitHub</a>
       </div>
     </nav>
   </header>
 
   <main class="container">
+    <div class="resume-download-wrap">
+      <a
+        class="resume-download"
+        href="/assets/css/static/files/Scanlin_Kaylee_Resume_Spring2026.pdf"
+        download="Scanlin_Kaylee_Resume_Spring2026.pdf"
+      >Download PDF resume</a>
+    </div>
     <header class="resume-head">
       <h1>Kaylee Scanlin</h1>
       <p>

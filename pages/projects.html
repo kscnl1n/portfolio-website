@@ -4,14 +4,56 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Projects — Kaylee Scanlin</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-  <script defer src="/assets/js/main.js"></script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+    :root {
+      --bg: #0a0a0d;
+      --panel: #111118;
+      --panel-soft: #14141f;
+      --text: #f5f7ff;
+      --muted: #b5bbd6;
+      --line: #232337;
+      --accent: #86ffd1;
+      --accent-2: #7aa2ff;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: radial-gradient(circle at 10% 0%, #1a1b2d 0%, var(--bg) 42%);
+      color: var(--text); font-family: Inter, system-ui, sans-serif; line-height: 1.65;
+    }
+    a { color: var(--text); text-decoration: none; }
+    a:hover { color: var(--accent); }
+    .container { width: min(1080px, 92vw); margin: 0 auto; }
+    .site-header {
+      position: sticky; top: 0; z-index: 20; backdrop-filter: blur(8px);
+      background: rgba(10, 10, 13, 0.75); border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { font-family: "JetBrains Mono", monospace; font-size: 0.9rem; color: var(--accent); }
+    .brand::before { content: "kaylee_scanlin"; }
+    .nav-links { display: flex; gap: 1.25rem; font-size: 0.95rem; color: var(--muted); }
+    .active { color: var(--accent); }
+    main.container { padding: 4rem 0; }
+    .page-head { border-bottom: 1px solid var(--line); padding-bottom: 1.5rem; margin-bottom: 1.4rem; }
+    .page-head h1 { margin: 0 0 0.8rem; font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -0.02em; }
+    .lead { color: var(--muted); margin: 0.6rem 0; }
+    .stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .panel {
+      border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem 1.1rem;
+      background: linear-gradient(180deg, rgba(26, 27, 45, 0.32), rgba(17, 17, 24, 0.95));
+    }
+    .site-footer { border-top: 1px solid var(--line); padding: 1.2rem 0 2rem; color: var(--muted); font-size: 0.9rem; }
+    @media (max-width: 720px) {
+      .nav { flex-direction: column; align-items: flex-start; justify-content: center; padding: 0.7rem 0; }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
     <nav class="nav container">
       <a class="brand" href="/"></a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button>
       <div id="navLinks" class="nav-links">
         <a href="/index.html">About</a>
         <a class="active" href="/pages/projects.html" aria-current="page">Projects</a>
@@ -26,7 +68,7 @@
       <h1>Projects</h1>
       <p class="lead">This is a list of projects I have been responsible for throughout my career.
         I greatly enjoy sharing how I created all of these, so the personal projects I have below all have
-        walkthrough videos on my YouTube Channel and detailed write-ups on my blog.<p> 
+        walkthrough videos on my YouTube Channel and detailed write-ups on my blog.</p>
         <p>Feel free to reach out 
         with questions if you decide to recreate any yourself!
       </p>
@@ -52,9 +94,12 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-row">
-      <p class="t-small">© <span id="year"></span> Kaylee Scanlin</p>
+    <div class="container">
+      <p>© <span id="year"></span> Kaylee Scanlin</p>
     </div>
   </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

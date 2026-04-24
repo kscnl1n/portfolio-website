@@ -4,71 +4,93 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Fungus</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-  <script defer src="/assets/js/main.js"></script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap");
+    :root {
+      --bg: #0a0a0d; --text: #f5f7ff; --muted: #b5bbd6; --line: #232337; --accent: #86ffd1;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0; color: var(--text); line-height: 1.65; font-family: Inter, system-ui, sans-serif;
+      background: radial-gradient(circle at 10% 0%, #1a1b2d 0%, var(--bg) 42%);
+    }
+    a { color: var(--text); text-decoration: none; }
+    a:hover { color: var(--accent); }
+    .container { width: min(1080px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(8px); background: rgba(10,10,13,.75); border-bottom: 1px solid var(--line); }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { font-family: "JetBrains Mono", monospace; font-size: .9rem; color: var(--accent); }
+    .brand::before { content: "kaylee_scanlin"; }
+    .nav-links { display: flex; gap: 1.25rem; font-size: .95rem; }
+    .active { color: var(--accent); }
+    .hero { padding: 4rem 0 2rem; border-bottom: 1px solid var(--line); margin-bottom: 1.5rem; }
+    h1 { margin: 0 0 0.8rem; font-size: clamp(2rem, 5vw, 3rem); }
+    .t-body { color: var(--muted); }
+    .gallery {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; padding-bottom: 2rem;
+    }
+    .gallery a {
+      border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: block; background: #111118;
+      transition: transform 140ms ease, border-color 140ms ease;
+    }
+    .gallery a:hover { transform: translateY(-3px); border-color: var(--accent); }
+    .gallery img { width: 100%; height: 260px; object-fit: cover; display: block; }
+    .secret-fungus { color: var(--muted); text-align: center; margin: 0 0 1.8rem; font-size: 0.9rem; }
+    @media (max-width: 720px) {
+      .nav { flex-direction: column; align-items: flex-start; justify-content: center; padding: 0.7rem 0; }
+    }
+  </style>
 </head>
 <body>
-
   <header class="site-header">
     <nav class="nav container">
       <a class="brand" href="/"></a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button>
       <div id="navLinks" class="nav-links">
         <a href="/index.html">About</a>
-        <a class="active" href="/pages/projects.html" aria-current="page">Projects</a>
+        <a href="/pages/projects.html">Projects</a>
         <a href="/pages/contact.html">Contact</a>
-        <a href="/pages/cat-pictures.html">Cat</a>
+        <a class="active" href="/pages/cat-pictures.html" aria-current="page">Cat</a>
       </div>
     </nav>
   </header>
 
   <main id="main" class="container">
-  <section class="hero">
-  <h1>Fungus</h1>
-    <p class="t-body">These are pictures of my helpful coding assistant, Fungus.</p>
-  </section>
+    <section class="hero">
+      <h1>Fungus</h1>
+      <p class="t-body">These are pictures of my helpful coding assistant, Fungus.</p>
+    </section>
 
-  <div class="gallery">
-    <a href="/assets/css/static/images/fungus_1.jpeg" target="_blank">
-      <img src="/assets/css/static/images/fungus_1.jpeg" alt="Photo 1">
-    </a>
-
-    <a href="/assets/css/static/images/fungus_2.jpeg" target="_blank">
-      <img src="/assets/css/static/images/fungus_2.jpeg" alt="Photo 1">
-    </a>
-
-    <a href="/assets/css/static/images/fungus_3.jpeg" target="_blank">
-      <img src="/assets/css/static/images/fungus_3.jpeg" alt="Photo 1">
-    </a>
-
-    <a href="/assets/css/static/images/fungus_4.jpeg" target="_blank">
-      <img src="/assets/css/static/images/fungus_4.jpeg" alt="Photo 1">
-    </a>
-
-    <a href="/assets/css/static/images/fungus_5.jpeg" target="_blank">
-      <img src="/assets/css/static/images/fungus_5.jpeg" alt="Photo 1">
-    </a>
-
-    <a href="/assets/css/static/images/fungus_6.jpeg" target="_blank">
-      <img src="/assets/css/static/images/fungus_6.jpeg" alt="Photo 1">
-    </a>
-
-    <a href="/assets/css/static/images/fungus_7.jpeg" target="_blank">
-      <img src="/assets/css/static/images/fungus_7.jpeg" alt="Photo 1">
-    </a>
-
-    <a href="/assets/css/static/images/fungus_8.jpeg" target="_blank">
-      <img src="/assets/css/static/images/fungus_8.jpeg" alt="Photo 1">
-    </a>
-  </div>
-
+    <div class="gallery">
+      <a href="/assets/css/static/images/fungus_1.jpeg" target="_blank">
+        <img src="/assets/css/static/images/fungus_1.jpeg" alt="Photo 1">
+      </a>
+      <a href="/assets/css/static/images/fungus_2.jpeg" target="_blank">
+        <img src="/assets/css/static/images/fungus_2.jpeg" alt="Photo 1">
+      </a>
+      <a href="/assets/css/static/images/fungus_3.jpeg" target="_blank">
+        <img src="/assets/css/static/images/fungus_3.jpeg" alt="Photo 1">
+      </a>
+      <a href="/assets/css/static/images/fungus_4.jpeg" target="_blank">
+        <img src="/assets/css/static/images/fungus_4.jpeg" alt="Photo 1">
+      </a>
+      <a href="/assets/css/static/images/fungus_5.jpeg" target="_blank">
+        <img src="/assets/css/static/images/fungus_5.jpeg" alt="Photo 1">
+      </a>
+      <a href="/assets/css/static/images/fungus_6.jpeg" target="_blank">
+        <img src="/assets/css/static/images/fungus_6.jpeg" alt="Photo 1">
+      </a>
+      <a href="/assets/css/static/images/fungus_7.jpeg" target="_blank">
+        <img src="/assets/css/static/images/fungus_7.jpeg" alt="Photo 1">
+      </a>
+      <a href="/assets/css/static/images/fungus_8.jpeg" target="_blank">
+        <img src="/assets/css/static/images/fungus_8.jpeg" alt="Photo 1">
+      </a>
+    </div>
   </main>
 
   <p class="secret-fungus">
     secret button
     <!-- breathing space -->
-
   </p>
-
-
-<body>
+</body>
+</html>

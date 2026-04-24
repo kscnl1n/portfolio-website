@@ -4,20 +4,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kaylee Scanlin Resume</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap");
+    :root {
+      --bg: #0a0a0d; --text: #f5f7ff; --muted: #b5bbd6; --line: #232337; --accent: #86ffd1; --card: #111118;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0; color: var(--text); line-height: 1.6; font-family: Inter, system-ui, sans-serif;
+      background: radial-gradient(circle at 10% 0%, #1a1b2d 0%, var(--bg) 42%);
+    }
+    a { color: var(--text); text-decoration: none; }
+    a:hover { color: var(--accent); }
+    .container { width: min(1080px, 92vw); margin: 0 auto; }
+    .site-header { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(8px); background: rgba(10,10,13,.75); border-bottom: 1px solid var(--line); }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { font-family: "JetBrains Mono", monospace; font-size: .9rem; color: var(--accent); }
+    .brand::before { content: "kaylee_scanlin"; }
+    .nav-links { display: flex; gap: 1.25rem; font-size: .95rem; }
+    .active { color: var(--accent); }
+    main.container { padding: 2.5rem 0 4rem; }
+    header.resume-head {
+      border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem 1.1rem; background: var(--card); margin-bottom: 1rem;
+    }
+    h1 { margin: 0 0 .45rem; font-size: clamp(2rem, 5vw, 2.8rem); }
+    h2 {
+      margin: 1.4rem 0 .8rem; font-size: 1rem; color: #7aa2ff; text-transform: uppercase; letter-spacing: .08em;
+      border-top: 1px solid var(--line); padding-top: 1rem;
+    }
+    article {
+      border: 1px solid var(--line); border-radius: 14px; padding: 1rem; margin-bottom: .8rem;
+      background: linear-gradient(180deg, rgba(26,27,45,.32), rgba(17,17,24,.95));
+    }
+    h3 { margin: 0 0 .4rem; font-size: 1.04rem; }
+    p, li { color: var(--muted); }
+    p { margin: .3rem 0; }
+    ul { margin: .5rem 0 0; padding-left: 1.1rem; }
+    @media (max-width: 720px) {
+      .nav { flex-direction: column; align-items: flex-start; justify-content: center; padding: .7rem 0; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Kaylee Scanlin</h1>
-    <p>
-      scanlinsystems@gmail.com |
-      <a href="#">LinkedIn</a> |
-      <a href="https://www.kayleescanlin.dev">www.kayleescanlin.dev</a> |
-      <a href="#">Github</a> |
-      832.829.9951
-    </p>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="/"></a>
+      <div class="nav-links">
+        <a href="/index.html">About</a>
+        <a class="active" href="/pages/resume.html" aria-current="page">Resume</a>
+        <a href="/pages/cat-pictures.html">Cat</a>
+      </div>
+    </nav>
   </header>
 
-  <main>
+  <main class="container">
+    <header class="resume-head">
+      <h1>Kaylee Scanlin</h1>
+      <p>
+        scanlinsystems@gmail.com |
+        <a href="#">LinkedIn</a> |
+        <a href="https://www.kayleescanlin.dev">www.kayleescanlin.dev</a> |
+        <a href="#">Github</a> |
+        832.829.9951
+      </p>
+    </header>
+
     <section>
       <h2>Education</h2>
 

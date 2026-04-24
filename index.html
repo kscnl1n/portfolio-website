@@ -1,30 +1,238 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
-  </style>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Kaylee Scanlin</title>
   <meta name="description" content="Kaylee Scanlin — portfolio, projects, and writing." />
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-  <script defer src="/assets/js/main.js"></script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+    :root {
+      --bg: #0a0a0d;
+      --panel: #111118;
+      --panel-soft: #14141f;
+      --text: #f5f7ff;
+      --muted: #b5bbd6;
+      --line: #232337;
+      --accent: #86ffd1;
+      --accent-2: #7aa2ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at 10% 0%, #1a1b2d 0%, var(--bg) 42%);
+      color: var(--text);
+      font-family: Inter, system-ui, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent);
+    }
+
+    .container {
+      width: min(1080px, 92vw);
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(8px);
+      background: rgba(10, 10, 13, 0.75);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.9rem;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .brand::before {
+      content: "kaylee_scanlin";
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .hero {
+      padding: 6rem 0 3rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.82rem;
+      color: var(--accent);
+      margin: 0 0 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 4.4rem);
+      line-height: 1.05;
+      margin: 0;
+      letter-spacing: -0.03em;
+    }
+
+    .lead {
+      max-width: 72ch;
+      margin-top: 1.5rem;
+      font-size: 1.07rem;
+      color: var(--muted);
+    }
+
+    .cta-row {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: linear-gradient(120deg, #1d2038, #171827);
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+      transition: 150ms ease;
+    }
+
+    .terminal {
+      margin-top: 2rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .terminal-top {
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: "JetBrains Mono", monospace;
+      background: var(--panel-soft);
+    }
+
+    .terminal-code {
+      margin: 0;
+      padding: 1.1rem 1rem 1.2rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.9rem;
+      color: #d7dcf7;
+      white-space: pre-wrap;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      padding: 2.5rem 0 4rem;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(26, 27, 45, 0.32), rgba(17, 17, 24, 0.95));
+      padding: 1.2rem 1.1rem;
+    }
+
+    .t-h2 {
+      margin-top: 0;
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .t-body {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    ul.t-body {
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 1.2rem 0 2rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .skip-link:focus {
+      left: 1rem;
+      top: 1rem;
+      background: #fff;
+      color: #000;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      z-index: 999;
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 0.7rem 0;
+      }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <nav class="nav container">
-      <a class="brand" href="/"> </a>
-
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navLinks">
-        Menu
-      </button>
-
+      <a class="brand" href="/"></a>
       <div id="navLinks" class="nav-links">
         <a href="/index.html">About</a>
-        <!-- <a href="/pages/projects.html">Projects</a> -->
         <a href="/pages/resume.html">Resume</a>
         <a href="/pages/cat-pictures.html">Cat</a>
       </div>
@@ -33,41 +241,50 @@
 
   <main id="main" class="container">
     <section class="hero">
+      <p class="eyebrow">// about</p>
       <h1>Hi, I’m Kaylee.</h1>
 
-      <!-- Replace the text below with the website text you want on the homepage -->
       <p class="lead">
-        I am a computer science undergrad (grad. 2027) at Texas State University with a variety of experience across 
-        the data engineering, software development, and HPC space. This is my portfolio.</p>
+        I am a computer science undergrad (grad. 2027) at Texas State University with a variety of experience across
+        the data engineering, software development, and HPC space. This is my portfolio.
+      </p>
 
-        <p>For professional inquiries, please e-mail me at <b>scanlinsystems@gmail.com</b> or click the contact button below.
+      <p class="lead">
+        For professional inquiries, please e-mail me at <b>scanlinsystems@gmail.com</b> or click the contact button below.
       </p>
 
       <div class="cta-row">
-        <!--<a class="btn" href="/pages/projects.html">View Projects</a> -->
         <a class="btn" href="/pages/contact.html">Contact</a>
+      </div>
+
+      <div class="terminal" aria-hidden="true">
+        <div class="terminal-top">terminal</div>
+        <pre class="terminal-code">$ whoami
+> kaylee_scanlin
+
+$ echo $STATUS
+> software developer and junior project manager</pre>
       </div>
     </section>
 
     <section class="columns">
       <article class="panel">
         <h2 class="t-h2">Focus</h2>
-        <p class="t-body">Currently, I work as a software developer and junior project manager for the High-Performance 
+        <p class="t-body">Currently, I work as a software developer and junior project manager for the High-Performance
           Computing Engineering lab at Texas State.</p>
-          
-          <p>My previous positions include <b>data engineering intern</b> for <b>Pacific
+        <p class="t-body" style="margin-top:0.75rem;">My previous positions include <b>data engineering intern</b> for <b>Pacific
           Northwest National Labs</b> and <b>machine learning engineering intern</b> for the <b>Texas Advanced Computing Center.</b>
         </p>
       </article>
 
       <article class="panel">
         <h2 class="t-h2">Recent</h2>
-        <p class="t-body">
+        <ul class="t-body">
           <li>Texas State Projects - Founder</li>
           <li>LEAP2 Cluster Portal - Lead Engineer</li>
           <li>Pacific Northwest National Labs</li>
           <li>Texas Advanced Computing Center</li>
-        </p>
+        </ul>
       </article>
 
       <article class="panel">
@@ -77,16 +294,20 @@
           <a href="/pages/projects.html">Projects</a> ·
           <a href="/pages/resume.html">Resume</a> ·
           <a href="https://www.linkedin.com/in/k-scanlin-6815b8284/">LinkedIn</a> ·
-          <a href="https://github.com/kscnl1n">GitHub</a> 
+          <a href="https://github.com/kscnl1n">GitHub</a>
         </p>
       </article>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-row">
-      <p class="t-small">© <span id="year"></span> Kaylee Scanlin</p>
+    <div class="container">
+      <p>© <span id="year"></span> Kaylee Scanlin</p>
     </div>
   </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

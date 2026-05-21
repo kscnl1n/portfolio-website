@@ -1,9 +1,9 @@
 /* Early-internet light mode — inspired by classic personal homepages */
 html[data-theme="retro"] {
-  --bg: #ffffff;
-  --panel: #f4f4f4;
-  --panel-soft: #ebebeb;
-  --card: #f8f8f8;
+  --bg: #fff3e8;
+  --panel: #f1e5db;
+  --panel-soft: #f1e5db;
+  --card: #e1c7f8;
   --text: #000000;
   --muted: #333333;
   --line: #000000;
@@ -16,7 +16,7 @@ html[data-theme="retro"],
 html[data-theme="retro"] body {
   background: #ffffff !important;
   color: var(--text) !important;
-  font-family: "Times New Roman", Times, serif !important;
+  font-family: "Arial", sans-serif !important;
   line-height: 1.5 !important;
 }
 
@@ -48,7 +48,7 @@ html[data-theme="retro"] .nav {
 }
 
 html[data-theme="retro"] .brand {
-  font-family: "Courier New", Courier, monospace !important;
+  font-family: "Arial", sans-serif !important;
   font-size: 1rem !important;
   font-weight: 700 !important;
   color: #000000 !important;
@@ -208,7 +208,7 @@ html[data-theme="retro"] .project-tags li {
   border: 1px solid #000000 !important;
   background: #f0f0f0 !important;
   color: #000000 !important;
-  font-family: "Courier New", Courier, monospace !important;
+  font-family: "Arial", sans-serif !important;
 }
 
 html[data-theme="retro"] .search-input,
@@ -217,7 +217,7 @@ html[data-theme="retro"] #projectSearch {
   border: 2px inset #808080 !important;
   background: #ffffff !important;
   color: #000000 !important;
-  font-family: "Times New Roman", Times, serif !important;
+  font-family: "Arial", sans-serif !important;
 }
 
 html[data-theme="retro"] .search-input:focus,

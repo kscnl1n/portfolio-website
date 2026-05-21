@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("site-theme") === "retro") {
+          document.documentElement.setAttribute("data-theme", "retro");
+        }
+      } catch (_) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="/assets/css/theme.css" />
+  <link rel="stylesheet" href="/assets/css/retro-light.css" />
   <!-- TODO: add og:image + description when main site cards are finalized -->
   <title>Kaylee Scanlin Resume</title>
   <style>
@@ -69,7 +80,10 @@
   <!-- HACK: duplicate header markup; DRY with snippet or SSI later -->
   <header class="site-header">
     <nav class="nav container">
-      <a class="brand" href="/"></a>
+      <div class="nav-start">
+        <button type="button" id="themeToggle" class="theme-toggle" aria-pressed="false">Light mode</button>
+        <a class="brand" href="/"></a>
+      </div>
       <div id="navLinks" class="nav-links">
         <a href="/index.html">About</a>
         <a href="/pages/resume.html">Resume</a>
@@ -280,5 +294,6 @@
       </article>
     </section>
   </main>
+  <script src="/assets/js/theme.js" defer></script>
 </body>
 </html>

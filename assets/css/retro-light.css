@@ -1,0 +1,267 @@
+/* Early-internet light mode — inspired by classic personal homepages */
+html[data-theme="retro"] {
+  --bg: #ffffff;
+  --panel: #f4f4f4;
+  --panel-soft: #ebebeb;
+  --card: #f8f8f8;
+  --text: #000000;
+  --muted: #333333;
+  --line: #000000;
+  --accent: #0000ee;
+  --accent-2: #0000ee;
+  color-scheme: light;
+}
+
+html[data-theme="retro"],
+html[data-theme="retro"] body {
+  background: #ffffff !important;
+  color: var(--text) !important;
+  font-family: "Times New Roman", Times, serif !important;
+  line-height: 1.5 !important;
+}
+
+html[data-theme="retro"] a {
+  color: #0000ee !important;
+  text-decoration: underline !important;
+}
+
+html[data-theme="retro"] a:visited {
+  color: #551a8b !important;
+}
+
+html[data-theme="retro"] a:hover {
+  color: #0000ee !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="retro"] .site-header {
+  position: static !important;
+  backdrop-filter: none !important;
+  background: #ffffff !important;
+  border-bottom: 2px solid #000000 !important;
+}
+
+html[data-theme="retro"] .nav {
+  min-height: auto !important;
+  padding: 0.5rem 0 !important;
+  align-items: flex-start !important;
+}
+
+html[data-theme="retro"] .brand {
+  font-family: "Courier New", Courier, monospace !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  color: #000000 !important;
+  text-decoration: none !important;
+}
+
+html[data-theme="retro"] .brand:hover {
+  color: #0000ee !important;
+}
+
+html[data-theme="retro"] .nav-links {
+  color: #000000 !important;
+  font-size: 1rem !important;
+}
+
+html[data-theme="retro"] .nav-links a {
+  color: #0000ee !important;
+  text-decoration: underline !important;
+}
+
+html[data-theme="retro"] .nav-links a:hover,
+html[data-theme="retro"] .nav-links a.active,
+html[data-theme="retro"] .active {
+  color: #551a8b !important;
+  border-bottom-color: transparent !important;
+}
+
+html[data-theme="retro"] .theme-toggle {
+  font-family: "MS Sans Serif", "Arial", sans-serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  padding: 0.2rem 0.5rem !important;
+  border-radius: 0 !important;
+  border: 2px outset #c0c0c0 !important;
+  background: #c0c0c0 !important;
+  color: #000000 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="retro"] .theme-toggle:hover {
+  border-style: inset !important;
+  color: #000000 !important;
+}
+
+html[data-theme="retro"] .eyebrow {
+  font-family: "Courier New", Courier, monospace !important;
+  color: #000000 !important;
+  font-size: 0.95rem !important;
+}
+
+html[data-theme="retro"] h1,
+html[data-theme="retro"] h2,
+html[data-theme="retro"] h3,
+html[data-theme="retro"] .t-h1,
+html[data-theme="retro"] .t-h2 {
+  font-family: "Times New Roman", Times, serif !important;
+  color: #000000 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+html[data-theme="retro"] h2 {
+  color: #000000 !important;
+  border-top: 1px solid #000000 !important;
+}
+
+html[data-theme="retro"] .lead,
+html[data-theme="retro"] .t-body,
+html[data-theme="retro"] .t-lead,
+html[data-theme="retro"] .t-small,
+html[data-theme="retro"] p,
+html[data-theme="retro"] li {
+  color: #000000 !important;
+}
+
+html[data-theme="retro"] .hero,
+html[data-theme="retro"] .page-head {
+  border-bottom: 1px solid #000000 !important;
+}
+
+html[data-theme="retro"] .btn,
+html[data-theme="retro"] .resume-download {
+  border-radius: 0 !important;
+  border: 2px outset #c0c0c0 !important;
+  background: #c0c0c0 !important;
+  color: #000000 !important;
+  font-family: "Arial", sans-serif !important;
+  box-shadow: none !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+html[data-theme="retro"] .btn:hover,
+html[data-theme="retro"] .resume-download:hover {
+  border-style: inset !important;
+  color: #000000 !important;
+  transform: none !important;
+}
+
+html[data-theme="retro"] .terminal {
+  border-radius: 0 !important;
+  border: 2px inset #808080 !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="retro"] .terminal-top {
+  font-family: "Courier New", Courier, monospace !important;
+  background: #c0c0c0 !important;
+  color: #000000 !important;
+  border-bottom: 1px solid #000000 !important;
+}
+
+html[data-theme="retro"] .terminal-code {
+  font-family: "Courier New", Courier, monospace !important;
+  color: #000000 !important;
+  background: #ffffff !important;
+}
+
+html[data-theme="retro"] .panel,
+html[data-theme="retro"] article,
+html[data-theme="retro"] header.resume-head,
+html[data-theme="retro"] .search-section,
+html[data-theme="retro"] .result-card,
+html[data-theme="retro"] .project-card {
+  border-radius: 0 !important;
+  border: 1px solid #000000 !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="retro"] .project-card:hover,
+html[data-theme="retro"] a.result-card:hover {
+  border-color: #000000 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+html[data-theme="retro"] .project-card__title,
+html[data-theme="retro"] .project-card__body,
+html[data-theme="retro"] .result-title,
+html[data-theme="retro"] .result-summary,
+html[data-theme="retro"] .result-meta {
+  color: #000000 !important;
+}
+
+html[data-theme="retro"] .project-card__meta,
+html[data-theme="retro"] .search-label,
+html[data-theme="retro"] .t-h2 {
+  color: #000000 !important;
+  font-family: "Arial", sans-serif !important;
+  text-transform: none !important;
+}
+
+html[data-theme="retro"] .project-tags li {
+  border-radius: 0 !important;
+  border: 1px solid #000000 !important;
+  background: #f0f0f0 !important;
+  color: #000000 !important;
+  font-family: "Courier New", Courier, monospace !important;
+}
+
+html[data-theme="retro"] .search-input,
+html[data-theme="retro"] #projectSearch {
+  border-radius: 0 !important;
+  border: 2px inset #808080 !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  font-family: "Times New Roman", Times, serif !important;
+}
+
+html[data-theme="retro"] .search-input:focus,
+html[data-theme="retro"] #projectSearch:focus {
+  outline: 1px dotted #000000 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="retro"] .site-footer {
+  border-top: 2px solid #000000 !important;
+  color: #000000 !important;
+}
+
+html[data-theme="retro"] .gallery a {
+  border-radius: 0 !important;
+  border: 1px solid #000000 !important;
+  background: #ffffff !important;
+}
+
+html[data-theme="retro"] .gallery a:hover {
+  transform: none !important;
+  border-color: #0000ee !important;
+}
+
+html[data-theme="retro"] .secret-fungus {
+  color: #333333 !important;
+}
+
+html[data-theme="retro"] h3.resume-section-label {
+  font-family: "Arial", sans-serif !important;
+  color: #000000 !important;
+}
+
+html[data-theme="retro"] section[id]:target,
+html[data-theme="retro"] article[id]:target,
+html[data-theme="retro"] .project-card[id]:target,
+html[data-theme="retro"] section#about-hero:target,
+html[data-theme="retro"] article.panel:target {
+  box-shadow: none !important;
+  outline: 2px dotted #000000 !important;
+  outline-offset: 2px;
+}
+
+html[data-theme="retro"] .skip-link:focus {
+  border-radius: 0 !important;
+  border: 2px solid #000000 !important;
+}

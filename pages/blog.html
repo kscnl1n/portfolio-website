@@ -3,6 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("site-theme") === "retro") {
+          document.documentElement.setAttribute("data-theme", "retro");
+        }
+      } catch (_) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="/assets/css/theme.css" />
+  <link rel="stylesheet" href="/assets/css/retro-light.css" />
   <title>Projects</title>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap");
@@ -38,7 +49,10 @@
 <body>
   <header class="site-header">
     <nav class="nav container">
-      <a class="brand" href="/">Kaylee Scanlin</a>
+      <div class="nav-start">
+        <button type="button" id="themeToggle" class="theme-toggle" aria-pressed="false">Light mode</button>
+        <a class="brand" href="/">Kaylee Scanlin</a>
+      </div>
       <div id="navLinks" class="nav-links">
         <a href="/index.html">About</a>
         <a class="active" href="/pages/projects.html" aria-current="page">Projects</a>
@@ -74,6 +88,7 @@
       <p class="t-small">© <span id="year"></span> Kaylee Scanlin</p>
     </div>
   </footer>
+  <script src="/assets/js/theme.js" defer></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>

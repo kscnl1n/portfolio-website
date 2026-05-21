@@ -1,0 +1,39 @@
+/* Theme toggle + nav layout (works in dark and retro modes) */
+.nav-start {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.theme-toggle {
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.35rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid var(--line, #232337);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--muted, #b5bbd6);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--accent, #86ffd1);
+  border-color: var(--accent, #86ffd1);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent, #86ffd1);
+  outline-offset: 2px;
+}
+
+@media (max-width: 720px) {
+  .nav-start {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
